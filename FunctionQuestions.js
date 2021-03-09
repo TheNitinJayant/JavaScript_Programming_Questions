@@ -65,7 +65,7 @@ function Q4(){
         console.log(animal);
         var animal = "Dog"; // the varibale animal is hoisted upwards when the interpreter reads the code.
 
-        // It goes like this
+        // It goes like this (just an asumption as the real reason lies in the execution stack)
 
         // var animal;
         // console.log(animal);
@@ -76,14 +76,26 @@ function Q4(){
     function hoistingExample2(){
 
         console.log(animal);
-        const animal = "Dog"; // variable declaration with const are not hoisted like they are in var
+        const animal = "Dog"; 
+        
+        // variable declaration with const are not hoisted like they are in var.
+        // If we dive deeper than we will get to know that const and let are hoisted but they lie in a different context rather than the global context.
+        // The time between the let or const variable was hoisted and it was assigned a value is known as the temporal dead zone. 
+        // Due to this temporal dead these hoisted variables are not accessable even if they are assigned memory and a value of undefined.
+        // This is why a error of ReferenceError type is thrown by javascript.
 
     }
 
     function hoistingExample3(){
 
         console.log(animal);
-        let animal = "Dog"; // variable declaration with let are not hoisted like they are in var
+        let animal = "Dog"; 
+        
+        // variable declaration with let are not hoisted like they are in var
+        // If we dive deeper than we will get to know that const and let are hoisted but they lie in a different context rather than the global context.
+        // The time between the let or const variable was hoisted and it was assigned a value is known as the temporal dead zone. 
+        // Due to this temporal dead these hoisted variables are not accessable even if they are assigned memory and a value of undefined.
+        // This is why a error of ReferenceError type is thrown by javascript.
 
     }
 
@@ -116,6 +128,68 @@ function Q5(){
     }
 
     hoistingExample1();
+}
+
+function Q6(){
+
+    function closureExample1(){
+
+        function x(){
+            var a = 10;
+
+            function y(){
+                console.log(a); // finds a in the lexical scope from the parent function.
+            }
+
+            return y;
+        }
+
+        const z = x();
+
+        console.log(z); // just prints the function y as it was returned.
+        z(); // executes y remembering the reference of a and prints 10;
+    }
+
+    function closureExample2(){
+
+        function x(){
+            var a = 10;
+
+            function y(){
+                console.log(a); // finds a in the lexical scope from the parent function.
+            }
+
+            a = 100;
+
+            return y;
+        }
+
+        const z = x();
+
+        console.log(z); // just prints the function y as it was returned.
+        z(); // executes y remembering the reference of a and prints 100, since the reference was stored and not the value so 100 will be printed and not 10. This also means that a was not garbage collected.
+
+    }
+
+    function closureExample3(){
+
+        function z(){
+            
+            var b = 900;
+
+            function x() {
+
+                var a = 10;
+
+                function y(){
+                    console.log(a,b);
+                }
+            }
+        }
+    }
+
+    closureExample1();
+    closureExample2();
 }
 
 function main(){
