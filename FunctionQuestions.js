@@ -192,6 +192,14 @@ function Q6(){
     closureExample2();
 }
 
+
+function Q7(){
+    function generatorFunctionsExample1(){
+        
+    }
+}
+
+
 function main(){
     Q5();
 }
